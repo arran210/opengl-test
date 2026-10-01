@@ -4,6 +4,7 @@
 #include "config.h"
 
 #include "init.h"
+#include "shader.h"
 
 int main() {
 
@@ -11,6 +12,8 @@ int main() {
         std::cout << "Failed to initialize!" << std::endl;
         return -1;
     }
+
+    Shader shader("../shaders/basic.vert", "../shaders/basic.frag");
 
     float tri_vertices[] = {
         -0.5f, -0.5f, 0.0f,
@@ -33,6 +36,8 @@ int main() {
         );
 
         glClear(GL_COLOR_BUFFER_BIT);
+        
+        glUseProgram(shader);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

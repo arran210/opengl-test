@@ -16,6 +16,8 @@ add_executable(opengl-test
         src/init.cpp
         include/config.h
         include/init.h
+        src/shader.cpp
+        include/shader.h
 )
 
 target_include_directories(opengl-test PRIVATE

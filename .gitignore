@@ -70,6 +70,4 @@ Testing/
 .cache/
 
 # clion specific files
-editor.xml
-vcs.xml
-workspace.xml
+.idea/

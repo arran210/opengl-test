@@ -13,6 +13,9 @@ find_package(glfw3 REQUIRED)
 add_executable(opengl-test
         src/main.cpp
         src/gl.c
+        src/init.cpp
+        include/config.h
+        include/init.h
 )
 
 target_include_directories(opengl-test PRIVATE

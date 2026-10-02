@@ -4,10 +4,10 @@
 #pragma once
 #include "config.h"
 
-class Shader {
+class shader {
 public:
-    Shader(const std::string& vertex_file_path, const std::string& fragment_file_path);
-    ~Shader();
+    shader(const std::string& vertex_file_path, const std::string& fragment_file_path);
+    ~shader();
     [[nodiscard]] unsigned int get_shader_id() const;
     operator unsigned int() const;
 private:

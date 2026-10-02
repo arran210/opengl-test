@@ -1,10 +1,9 @@
 //
 // Created by arran-taylor on 10/1/26.
 //
-
 #include "shader.h"
 
-Shader::Shader(const std::string& vertex_file_path, const std::string& fragment_file_path) {
+shader::shader(const std::string& vertex_file_path, const std::string& fragment_file_path) {
     const unsigned int vertex_shader_id = create_shader_module(vertex_file_path, GL_VERTEX_SHADER);
     const unsigned int fragment_shader_id = create_shader_module(fragment_file_path, GL_FRAGMENT_SHADER);
 
@@ -32,19 +31,19 @@ Shader::Shader(const std::string& vertex_file_path, const std::string& fragment_
     glDeleteShader(fragment_shader_id);
 }
 
-Shader::~Shader() {
+shader::~shader() {
     glDeleteProgram(shader_id);
 }
 
-unsigned int Shader::get_shader_id() const {
+unsigned int shader::get_shader_id() const {
     return shader_id;
 }
 
-Shader::operator unsigned int() const {
+shader::operator unsigned int() const {
     return shader_id;
 }
 
-unsigned int Shader::create_shader_module(const std::string &file_path, unsigned int shader_type) {
+unsigned int shader::create_shader_module(const std::string &file_path, unsigned int shader_type) {
     std::ifstream shader_file;
     std::stringstream buffered_lines;
     std::string line;

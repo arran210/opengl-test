@@ -31,9 +31,7 @@ shader::shader(const std::string& vertex_file_path, const std::string& fragment_
     glDeleteShader(fragment_shader_id);
 }
 
-shader::~shader() {
-    glDeleteProgram(shader_id);
-}
+shader::shader() = default;
 
 unsigned int shader::get_shader_id() const {
     return shader_id;

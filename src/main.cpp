@@ -5,6 +5,7 @@
 
 #include "init.h"
 #include "shader.h"
+#include "tri.h"
 
 int main() {
 
@@ -13,38 +14,19 @@ int main() {
         return -1;
     }
 
-    const Shader shader("../shaders/basic.vert", "../shaders/basic.frag");
+    tri::program = shader("../shaders/basic.vert", "../shaders/basic.frag");
 
-    unsigned int VBO, VAO;
-    const std::vector<float> data = {
-        -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
-         0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
-         0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f
-    };
-
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
-
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(float),
-            data.data(), GL_STATIC_DRAW);
-
-    //position
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 24, (void*)0);
-    glEnableVertexAttribArray(0);
-
-    //color
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 24, (void*)12);
-    glEnableVertexAttribArray(1);
+    const tri triangle(
+    {-0.5f, -0.5f, -0.0f },
+    { 0.5f, -0.5f, -0.0f },
+    { 0.0f, 0.5f,  -0.0f },
+     { 1.0f, 0.5f, 0.0f, 1.0f }
+     );
 
     while (!glfwWindowShouldClose(window)) {
-        constexpr unsigned int vertex_count = 3;
-
         if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
             glfwSetWindowShouldClose(window, GL_TRUE);
         }
-
 
         glClearColor(
             0.1f,
@@ -55,14 +37,12 @@ int main() {
 
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glUseProgram(shader);
-
-        glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, vertex_count);
+        triangle.draw();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+
 
     glfwDestroyWindow(window);
     glfwTerminate();

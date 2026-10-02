@@ -46,6 +46,15 @@ add_executable(opengl-test
         include/init.h
         src/shader.cpp
         include/shader.h
+        src/tri.cpp
+        include/tri.h
+        include/vec2.h
+        src/vec2.cpp
+        include/math.h
+        src/color.cpp
+        include/color.h
+        src/vec3.cpp
+        include/vec3.h
 )
 
 target_include_directories(opengl-test PRIVATE
